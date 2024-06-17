@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% set icon_img = 'img/headshots/' + player_data.team_name + '/' + name + '.jpeg' %}
+  <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <title>{{ name }}'s Rankings</title>
+  <style>
+    .bar-text {
+      fill: white;
+      font-weight: bold;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+    .leader-text {
+      fill: white;
+      font-size: 12px;
+      text-anchor: middle;
+    }
+  </style>
+</head>
+<body>
+<h1>#{{ player_data['number']}} • {{ name }}</h1>
+<img class="player-image" src="{{url_for('static', filename=icon_img)}}">
+
+<div class="legend">
+  <div class="legend-item">
+    <svg width="20" height="20">
+      <rect width="20" height="20" fill="midnightblue"></rect>
+    </svg>
+    <span class="stat">Player's Stat</span>
+  </div>
+  <div class="legend-item">
+    <svg width="20" height="20">
+      <rect width="20" height="20" fill="mediumblue"></rect>
+    </svg>
+    <span class="stat">League Average</span>
+  </div>
+  <div class="legend-item">
+    <svg width="20" height="20">
+      <rect width="20" height="20" fill="blue"></rect>
+    </svg>
+    <span class="stat">League Leader</span>
+  </div>
+</div>
+
+<hr style="width: 750px;">
+
+<div class="chart-description">
+  <h3>PER GAME STATS</h3>
+</div>
+
+<div id="chart-container">
+  <svg id="chart"></svg>
+</div>
+
+<script>
+  const width = 1000;
+  const height = 600;
+  const marginTop = 10;
+  const marginRight = 25;
+  const marginBottom = 50;
+  const marginLeft = 100; // Increased left margin to accommodate text
+
+  const fx = d3.scaleBand()
+    .domain(["PPG", "RPG", "APG", "SPG", "BPG"])
+    .rangeRound([marginLeft, width - marginRight])
+    .paddingInner(0.2)
+    .paddingOuter(0.1);
+
+  const dummyData = [
+    { stat: "POINTS", PLY: {{ player_data['ppg']}}, AVG: {{ avg_marks['ppg'] }}, LL: {{ ll_marks_with_names['ppg']['value'] }}, LLName: "{{ ll_marks_with_names['ppg']['leader_name'] }}" },
+    { stat: "REBOUNDS", PLY: {{ player_data['rpg']}}, AVG: {{ avg_marks['rpg'] }}, LL: {{ ll_marks_with_names['rpg']['value'] }}, LLName: "{{ ll_marks_with_names['rpg']['leader_name'] }}" },
+    { stat: "ASSISTS", PLY: {{ player_data['apg']}}, AVG: {{ avg_marks['apg'] }}, LL: {{ ll_marks_with_names['apg']['value'] }}, LLName: "{{ ll_marks_with_names['apg']['leader_name'] }}" },
+    { stat: "STEALS", PLY: {{ player_data['spg']}}, AVG: {{ avg_marks['spg'] }}, LL: {{ ll_marks_with_names['spg']['value'] }}, LLName: "{{ ll_marks_with_names['spg']['leader_name'] }}" },
+    { stat: "BLOCKS", PLY: {{ player_data['bpg']}}, AVG: {{ avg_marks['bpg'] }}, LL: {{ ll_marks_with_names['bpg']['value'] }}, LLName: "{{ ll_marks_with_names['bpg']['leader_name'] }}" }
+  ];
+
+  const maxStatValue = d3.max(dummyData, d => d3.max([d.PLY, d.AVG, d.LL]));
+
+  const yScale = d3.scaleLinear()
+    .domain([0, 25])
+    .range([height - marginBottom, marginTop]);
+
+  const svg = d3.select("#chart")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "max-width: 100%; height: auto;");
+
+  const statGroups = svg.selectAll(".stat-group")
+    .data(["PPG", "RPG", "APG", "SPG", "BPG"])
+    .enter()
+    .append("g")
+    .attr("class", "stat-group")
+    .attr("transform", stat => `translate(${fx(stat)},0)`);
+
+  statGroups.selectAll(".bar")
+    .data((stat, i) => [
+      { label: dummyData[i].stat, value: dummyData[i].PLY },
+      { label: dummyData[i].stat, value: dummyData[i].AVG },
+      { label: dummyData[i].LLName, value: dummyData[i].LL } // Include name for LL
+    ])
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("x", (d, i) => i * (fx.bandwidth() / 3))
+    .attr("y", d => yScale(d.value))
+    .attr("width", fx.bandwidth() / 3)
+    .attr("height", d => height - marginBottom - yScale(d.value))
+    .attr("fill", (d, i) => i === 0 ? "midnightblue" : i === 1 ? "mediumblue" : "blue");
+
+  // Add text for stats and leader names
+  statGroups.selectAll(".bar-text")
+    .data((stat, i) => [
+      { label: dummyData[i].PLY.toFixed(1), value: dummyData[i].PLY },
+      { label: dummyData[i].AVG.toFixed(1), value: dummyData[i].AVG },
+      { label: dummyData[i].LL.toFixed(1) + " • " + dummyData[i].LLName, value: dummyData[i].LL } // Include name and stat for LL
+    ])
+    .enter()
+    .append("text")
+    .attr("class", "bar-text")
+    .attr("x", (d, i) => i * (fx.bandwidth() / 3) + fx.bandwidth() / 6)
+    .attr("y", d => yScale(d.value) - 15) // Adjust position above the bar
+    .attr("text-anchor", "middle") // Center the text horizontally
+    .text(d => d.label);
+
+  svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(fx).tickSizeOuter(0))
+    .call(g => g.selectAll("text").attr("fill", "white"));
+
+  svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(yScale).ticks(null, "s"))
+    .call(g => g.selectAll("text").attr("fill", "white"));
+</script>
+
+
+<hr style="width: 750px;">
+
+<div class="chart-description">
+  <h3>SHOT PERCENTAGES</h3>
+</div>
+
+<div id="chart-container2">
+  <svg id="chart2"></svg>
+</div>
+
+<script>
+  const maxStatValue2 = 101; // Maximum value for percentages
+  
+  const svg2 = d3.select("#chart2")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "max-width: 100%; height: auto;");
+
+  const fx2 = d3.scaleBand()
+    .domain(["FG%", "3PT%", "FT%", "eFG%", "TS%"])
+    .rangeRound([marginLeft, width - marginRight])
+    .paddingInner(0.2)
+    .paddingOuter(0.1);
+
+  const effData = [
+    { stat: "FIELD GOAL PCT", PLY: {{ player_data['FG%']}}, AVG: {{ avg_marks['FG%'] }}, LL: {{ ll_marks_with_names['FG%']['value'] }}, LLName: "{{ ll_marks_with_names['FG%']['leader_name'] }}" },
+    { stat: "THREE POINT PCT", PLY: {{ player_data['3PT%']}}, AVG: {{ avg_marks['3PT%'] }}, LL: {{ ll_marks_with_names['3PT%']['value'] }}, LLName: "{{ ll_marks_with_names['3PT%']['leader_name'] }}" },
+    { stat: "FREE THROW PCT", PLY: {{ player_data['FT%']}}, AVG: {{ avg_marks['FT%'] }}, LL: {{ ll_marks_with_names['FT%']['value'] }}, LLName: "{{ ll_marks_with_names['FT%']['leader_name'] }}" },
+    { stat: "EFFECTIVE FG PCT", PLY: {{ player_data['eFG%']}}, AVG: {{ avg_marks['eFG%'] }}, LL: {{ ll_marks_with_names['eFG%']['value'] }}, LLName: "{{ ll_marks_with_names['eFG%']['leader_name'] }}" },
+    { stat: "TRUE SHOOTING PCT", PLY: {{ player_data['TS%']}}, AVG: {{ avg_marks['TS%'] }}, LL: {{ ll_marks_with_names['TS%']['value'] }}, LLName: "{{ ll_marks_with_names['TS%']['leader_name'] }}" }
+  ];
+
+  const yScale2 = d3.scaleLinear()
+    .domain([0, 101])
+    .range([height - marginBottom, marginTop]);
+
+  const statGroups2 = svg2.selectAll(".stat-group")
+    .data(fx2.domain())
+    .enter()
+    .append("g")
+    .attr("class", "stat-group")
+    .attr("transform", stat => `translate(${fx2(stat)},0)`);
+
+  statGroups2.selectAll(".bar")
+    .data((stat, i) => [
+      { label: effData[i].stat, value: effData[i].PLY },
+      { label: effData[i].stat, value: effData[i].AVG },
+      { label: effData[i].LLName, value: effData[i].LL }
+    ])
+    .enter()
+    .append("rect")
+    .attr("class", "bar")
+    .attr("x", (d, i) => i * (fx2.bandwidth() / 3))
+    .attr("y", d => yScale2(d.value))
+    .attr("width", fx2.bandwidth() / 3)
+    .attr("height", d => height - marginBottom - yScale2(d.value))
+    .attr("fill", (d, i) => i === 0 ? "midnightblue" : i === 1 ? "mediumblue" : "blue");
+
+  // Add text for stats and leader names
+  statGroups2.selectAll(".bar-text")
+    .data((stat, i) => [
+      { label: effData[i].PLY.toFixed(1) + "%", value: effData[i].PLY },
+      { label: effData[i].AVG.toFixed(1) + "%", value: effData[i].AVG },
+      { label: effData[i].LL.toFixed(1) + "% • " + effData[i].LLName, value: effData[i].LL }
+    ])
+    .enter()
+    .append("text")
+    .attr("class", "bar-text")
+    .attr("x", (d, i) => i * (fx2.bandwidth() / 3) + fx2.bandwidth() / 6)
+    .attr("y", d => yScale2(d.value) - 15)
+    .attr("text-anchor", "middle")
+    .text(d => d.label);
+
+  svg2.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .call(d3.axisBottom(fx2).tickSizeOuter(0))
+    .call(g => g.selectAll("text").attr("fill", "white"));
+
+  svg2.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .call(d3.axisLeft(yScale2).ticks(null, "s"))
+    .call(g => g.selectAll("text").attr("fill", "white"));
+</script>
+
+
+</body>
+</html>

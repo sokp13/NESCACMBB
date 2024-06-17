@@ -1,0 +1,337 @@
+@font-face{
+	font-family: "Stratum Bold";
+	src: url('fonts/strat/stratum-no1-6.ttf') format('truetype');
+	font-weight: 500;
+}@font-face{
+	font-family: "Stratum Regular";
+	src: url('fonts/strat/stratum-no1-5.ttf') format('truetype');
+	font-weight: 400;
+}
+
+body{
+	background-image: url(/static/img/bg/Continentals.jpeg);
+	background-size: cover;
+	background-color: rgba(0, 0, 0, 0.75);
+	background-attachment: fixed;
+}
+
+h1{
+	color: white;
+	font-family: "Stratum Bold", monospace;
+	font-size: 50px;
+	text-transform: uppercase;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+h2{
+	color: white;
+	font-family: "Stratum Regular", monospace;
+	background-color: rgba(0, 0, 125, 0.8);
+	text-align: center;
+	font-size: 25px;
+	text-transform: uppercase;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h3{
+	color: white;
+	font-family: "Stratum Bold", monospace;
+	text-align: center;
+	font-size: 20px;
+	width: 750px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+hr{
+	background-color: white;
+	width: 750px;
+	border: none;
+	height: 1px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+a{
+	font-family: "Stratum Bold", monospace;
+	padding: 1px;
+}
+
+a:link, a:visited{
+	color: white;
+	text-decoration: none;
+}
+
+.header{
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;
+	gap: 5px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: black;
+
+}
+
+.header > div {
+	color: black;
+	font-family: Stratum Bold, monospace;
+	font-size: 15px;
+}
+
+.team-stat-grid{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	padding: 1px;
+	width: 750px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid darkgoldenrod;
+}
+
+.team-stat-grid > div {
+	background: rgba(0, 0, 125, 0.8);
+	text-align: center;
+	padding: 20px 0;
+}
+
+.solo{
+	display: grid;
+	grid-template-columns: auto;
+	gap: 5px;
+	padding: 1px;
+	width: 750px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.solo > div {
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	padding: 20px 0;
+	font-size: 30px;
+}
+
+.duo{
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 5px;
+	padding: 1px;
+	width: 750px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.duo > div {
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	padding: 20px 0;
+	font-size: 30px;
+}
+
+.one-by-three{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	gap: 10px;
+	padding: 1px;
+	width: 750px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.one-by-three > div {
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	padding: 20px 0;
+	font-size: 30px;
+}
+
+.one-by-four{
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	gap: 10px;
+	padding: 1px;
+	width: 750px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.one-by-four > div {
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	padding: 20px 0;
+	font-size: 30px;
+}
+
+.one-by-five{
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+	gap: 10px;
+	padding: 1px;
+	width: 750px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.one-by-five > div {
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	padding: 20px 0;
+	font-size: 30px;
+}
+
+.two-by-three{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-template-rows: auto auto;
+	gap: 10px;
+	padding: 1px;
+	width: 750px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.two-by-three > div {
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	padding: 20px 0;
+	font-size: 30px;
+}
+
+.totals-table{
+	color: white;
+	font-family: "Stratum Regular", monospace;
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	font-size: 15px;
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.table-header{
+	color: white;
+	font-family: "Stratum Regular", monospace;
+	background-color: black;
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	font-size: 15px;
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.stat{
+	font-family: "Stratum Bold", monospace;
+	font-size: 20px;
+}
+
+.data{
+	font-family: "Stratum Regular", monospace;
+	font-size: 40px;
+}
+
+
+.player-image{
+	display: block;
+	border-radius: 100%;
+	box-sizing: border-box;
+	width: 200px;
+	border: 1px solid darkgoldenrod;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.player-grid{
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	grid-template-rows: auto auto auto auto;
+	gap: 10px;
+	padding: 1px;
+	width: 750px;
+	color: white;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: transparent;
+}
+
+.player-grid > div {
+	background-color: rgba(0, 0, 125, 0.8);
+	text-shadow: black;
+	text-align: center;
+	padding: 20px 0;
+	font-size: 20px;
+	border: 1px solid darkgoldenrod;
+}
+
+.tag-link{
+	font-family: "Stratum Bold", monospace;
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	width: 750px;
+	padding: 20px 0;
+	font-size: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+.tags-grid{
+	display: grid;
+	grid-template-columns: auto;
+	width: 750px;
+	gap: 10px;
+	padding: 1px;
+	color: white;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tags-grid > div {
+	background-color: rgba(0, 0, 125, 0.8);
+	border: 1px solid darkgoldenrod;
+	text-align: center;
+	width: 750px;
+	padding: 20px 0;
+	font-size: 30px;
+}
+
+.tag-name{
+	font-family: "Stratum Bold", monospace;
+	font-size: 25px;
+}
+
+.tag-desc{
+	font-family: "Stratum Regular", monospace;
+	font-size: 20px;
+}
+
+.bar{
+	background-color: rgba(255, 175, 0, 0.50);
+}

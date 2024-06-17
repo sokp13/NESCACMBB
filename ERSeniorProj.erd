@@ -1,0 +1,59 @@
+erdiagram Model
+
+notation=crowsfoot
+
+// Strong entity //
+entity Player{
+    ID key
+    first_name
+    last_name
+    position
+    class_year
+    from
+    team_name
+}
+entity Teams{
+    team_name key
+    coach_name
+    asst_name1
+    asst_name2
+}
+ // Below are weak entities to Player //
+entity Body{
+    height
+    weight
+}
+
+entity Totals{
+    points
+    rebounds
+    offensive_rebounds
+    assists
+    steals
+    blocks
+    turnovers
+    fouls
+    possestions
+    games
+}
+
+entity Shot_Types{
+    at_rim
+    jumpshots
+    
+}
+
+entity Opp_Shot_Types{}
+
+// Relations //
+relationship measured {
+    Player -> Body
+}
+
+relationship shoots {
+    Player -> Shot_Types -> Totals
+}
+
+relationship defense {
+    Player -> Opp_Shot_Types
+}

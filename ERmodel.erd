@@ -1,0 +1,90 @@
+erdiagram Project
+
+notation=crowsfoot
+
+entity Person{
+    ID key
+    name // composite of first_name, last_name, nickname
+    position
+    team_name
+}
+
+weak entity General{
+    birth_date partial-key // composite of MM/DD/YYYY
+    age partial-key
+    hometown
+    nationality
+}
+
+weak relationship information {
+    General[1] -> Person[1]
+}
+
+weak entity Statistics{
+    statline partial-key // composite of PPG, APG, RPG, FG%, 3PT%, FT%
+    team
+    year
+}
+
+weak relationship scored {
+    Person[1] -> Statistics[N]
+}
+
+weak entity Body{
+    height partial-key
+    weight partial-key
+    wingspan
+    vertical
+}
+
+weak relationship measured {
+    Person[1] -> Body[1]
+}
+
+weak entity Contact{
+    phone_number partial-key
+    email partial-key
+    social_media
+}
+
+weak relationship reached_by {
+    Person[1] -> Contact[N]
+}
+
+entity Teams{
+    team_name key
+    coach_name key
+    location //composite of city, state, country
+}
+
+relationship played {
+    Person[N] -> Teams[N]
+}
+
+relationship scored_for{
+    Statistics[N] -> Teams[N]
+}
+
+
+entity Recruitment{
+    name key
+    team key
+    date // MM/DD/YYYY
+    official
+    offered
+}
+
+relationship visits{
+    Person[1] -> Recruitment[N]
+}
+
+weak entity Eligibility{
+    grad_class partial-key
+    age
+    gpa
+    post_graduate
+}
+
+weak relationship graduates{
+    Person[1] -> Eligibility[1]
+}

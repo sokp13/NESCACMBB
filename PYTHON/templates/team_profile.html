@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% set bg_img = 'img/bg/' + team.team_name + '.jpeg' %}
+	{% set css_path = team.team_name + '.css' %}
+	<link rel="stylesheet" href="{{url_for('static', filename=css_path)}}">
+    <title>{{ team['school']}} {{ team['team_name']}}</title>
+    <!-- Add any necessary styles or imports -->
+</head>
+
+<header class="header">
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/AMH">AMHERST</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/BAT">BATES</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/BOW">BOWDOIN</a>        
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/COL">COLBY</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/CON">CONN</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/HAM">HAMILTON</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/MID">MIDDLEBURY</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/TRI">TRINITY</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/TUF">TUFTS</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/WES">WESLEYAN</a>
+    </div>
+    <div>
+        <a style="color: white;" href="http://127.0.0.1:5000/teams/WIL">WILLIAMS</a>
+    </div>
+</header>
+<body>
+    <h1>{{ team['school'] }} {{ team['team_name'] }}</h1>
+    <h2>{{ team['wins'] }}-{{ team['losses'] }} ({{ team['nescac_wins'] }}-{{ team['nescac_losses'] }})</h2>
+    <div class="team-stat-grid">
+        <div>
+            <span class="stat">POINTS PER GAME</span><br>
+            <span class="data">{{ team['t_ppg'] }}</span>
+        </div>
+        <div>
+            <span class="stat">FIELD GOAL%</span><br>
+            <span class="data">{{ team['t_fg_pct'] }}</span>
+        </div>
+        <div>
+            <span class="stat">THREE-POINT%</span><br>
+            <span class="data">{{ team['t_th_pct'] }}</span>
+        </div>
+    </div>
+    <hr>
+    <div class="player-grid">
+        {% for player in roster %}
+            <div class="player-card">
+                <a style="text-decoration: none; color: inherit;" href="http://127.0.0.1:5000/players/{{ player['id'] }}" target="_self">
+                <span style="font-family:Stratum Bold;font-size: 30px">#{{ player['number'] }}</span>
+                <br>
+                <span style="font-family:Stratum Regular;text-transform: uppercase;">{{ player['last_name'] }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

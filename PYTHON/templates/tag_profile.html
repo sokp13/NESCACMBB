@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% set icon_img = 'img/headshots/' + team + '/' + player.last_name + '.jpeg' %}
+    {% set css_path = team + '.css' %}
+    <link rel="stylesheet" href="{{url_for('static', filename=css_path)}}"> <!-- External CSS Link -->
+    <title>{{ player['team_name'] }} – {{ name }}</title>
+</head>
+
+<header style="font-family:Stratum Bold, monospace; color: white; background-color:black; text-align: center;">
+    <a href="http://127.0.0.1:5000/home">NESCAC MEN'S BASKETBALL</a>
+</header>
+<body>
+    <h1>#{{ player['number']}} • {{ name }}</h1>
+    <h2><a href="http://127.0.0.1:5000/teams/{{ player['team_id'] }}">{{ player['school'] }} {{ player['team_name'] }}</a></h2>
+    <hr>
+    <div class="tags-grid">
+    {% for tag in tags %}
+        <div class="tag">
+            <span class="tag-name">{{ tag }}</span><br>
+            <span class="tag-desc">{{ tag_desc[tag] }}</span>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+</html>

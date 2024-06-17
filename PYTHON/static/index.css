@@ -1,0 +1,212 @@
+@font-face {
+    font-family: "Stratum Bold";
+    src: url('fonts/strat/stratum-no1-6.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Stratum Regular";
+    src: url('fonts/strat/stratum-no1-5.ttf') format('truetype');
+    font-weight: 400;
+}
+
+body {
+    background-image: url(/static/img/bg/home.jpeg);
+    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.75);
+    background-attachment: fixed;
+}
+
+h1 {
+    color: white;
+    font-family: "Stratum Bold", monospace;
+    font-size: 50px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: white;
+    font-family: "Stratum Regular", monospace;
+    text-align: center;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+
+h3 {
+    color: white;
+    font-family: "Stratum Bold", monospace;
+    background-color: rgba(0, 0, 0, 0.75);
+    text-align: center;
+    font-size: 20px;
+    width: 250px;
+    margin: 0 auto;
+}
+
+a:link, a:visited{
+	color: white;
+	text-decoration: none;
+}
+
+.one-by-five {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 10px;
+    padding: 1px;
+    width: 750px;
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.one-by-five > div {
+    background-color: rgba(0, 0, 0, 0.75);
+    text-align: center;
+    padding: 10px 0;
+    font-size: 30px;
+    border: 1px solid white;
+}
+
+.container {
+    border-style: solid;
+    border-color: white;
+    border: 1px;
+}
+
+.sep {
+    border-style: dashed;
+    border-color: grey;
+}
+
+.stat {
+    font-family: "Stratum Bold", monospace;
+    color: white;
+    font-size: 20px;
+}
+
+.data {
+    font-family: "Stratum Regular", monospace;
+    font-size: 35px;
+}
+
+.rank {
+    font-family: "Stratum Regular", monospace;
+    font-size: 25px;
+}
+
+#chart-container {
+    display: flex;
+    justify-content: center;
+    font-family: 'Stratum Bold', monospace;
+    font-size: 16px;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.legend-item span {
+    margin-left: 5px;
+}
+
+.logo {
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.team-list li {
+    padding: 10px;
+    font-size: 24px;
+    color: gray;
+    border: 1px solid white;
+    background-color: #101c27af;
+}
+
+.team-list a {
+    font-family: "Stratum Bold";
+    text-decoration: none;
+}
+
+.team-list a:visited {
+    color: white;
+}
+
+.team-list a:hover {
+    color: green;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+}
+
+.team-list,
+.top-players {
+    flex-basis: 30%;
+    width: 300px;
+    margin: 0 20px;
+    text-align: center;
+}
+
+.top-players a:visited {
+    color: white;
+}
+
+.top-players a:hover {
+    color: green;
+}
+
+.top-players li {
+    padding: 10px;
+    font-size: 18px;
+    color: gray;
+    border: 1px solid white;
+    background-color: #101c27af;
+}
+
+.top-players a {
+    text-decoration: none;
+}
+
+.top-cat {
+    flex-basis: 30%;
+    text-align: center;
+    width: 150px;
+}
+
+.top-cat a:visited {
+    color: white;
+}
+
+.top-cat a:hover {
+    color: green;
+}
+
+.top-cat li {
+    padding: 10px;
+    font-size: 18px;
+    color: gray;
+    border: 1px solid white;
+    background-color: #101c27af;
+}
+
+.top-cat a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}

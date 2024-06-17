@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% set icon_img = 'img/headshots/' + team + '/' + name + '.jpeg' %}
+    {% set css_path = team + '.css' %}
+    <link rel="stylesheet" href="{{url_for('static', filename=css_path)}}"> <!-- External CSS Link -->
+    <title>{{ player['team_name'] }} – {{ name }}</title>
+</head>
+
+<header style="font-family:Stratum Bold, monospace; color: white; background-color:black; text-align: center;">
+    <a href="http://127.0.0.1:5000/home">NESCAC MEN'S BASKETBALL</a>
+</header>
+<body>
+    <h1>#{{ player['number']}} • {{ name }}</h1>
+    <h2><a href="http://127.0.0.1:5000/teams/{{ player['team_id'] }}">{{ player['school'] }} {{ player['team_name'] }}</a></h2>
+    <img class="player-image" src="{{url_for('static', filename=icon_img)}}">
+    <p style="text-align: center;"> 
+        <span style="font-family:Stratum Bold;font-size: 20px;color: white">{{ player['height']}} {{ player['class']}} {{ player['position']}}</span> <br>
+        <span style="font-family:Stratum Regular;font-size: 20px;color: white">{{ player['from']}} • {{ player['country']}}</span>
+
+    <hr>
+    <div class="duo">
+        <div>
+            <span class="stat"><a href="http://127.0.0.1:5000/players/{{ ID }}/ranks">PLAYER COMPARISONS</a></span>
+        </div>
+        <div>
+            <span class="stat"><a href="http://127.0.0.1:5000/players/{{ ID }}/tags">PLAYER TAGS</a></span>
+        </div>
+    </div>
+    <hr>
+
+    <div class="solo">
+        <div>
+            <span class="data">{{ player['PER'] }}</span><br>
+            <span class="stat">PLAYER EFFICIENCY RATING</span>
+        </div>
+    </div>
+
+    <div class="duo">
+        <div>
+            <span class="data">{{ player['oRtg'] }}</span><br>
+            <span class="stat">OFFENSIVE RATING</span>
+        </div>
+        <div>
+            <span class="data">{{ player['dRtg'] }}</span><br>
+            <span class="stat">DEFENSIVE RATING</span>
+        </div>
+    </div>
+
+    <h3>PER GAME AVERAGES</h3>
+    <div class="one-by-five">
+        <div>
+            <span class="data">{{ player['ppg'] }}</span><br>
+            <span class="stat">POINTS</span>
+        </div>
+        <div>
+            <span class="data">{{ player['rpg'] }}</span><br>
+            <span class="stat">REBOUNDS</span>
+        </div>
+        <div>
+            <span class="data">{{ player['apg'] }}</span><br>
+            <span class="stat">ASSISTS</span>
+        </div>
+        <div>
+            <span class="data">{{ player['spg'] }}</span><br>
+            <span class="stat">STEALS</span>
+        </div>
+        <div>
+            <span class="data">{{ player['bpg'] }}</span><br>
+            <span class="stat">BLOCKS</span>
+        </div>
+    </div>
+
+    <h3>SHOOTING EFFICIENCY</h3>
+    <div class="two-by-three">
+        <div>
+            <span class="data">{{ player['fg_pct'] }}</span><br>
+            <span class="stat">FG%</span>
+        </div>
+        <div>
+            <span class="data">{{ player['thr_fg_pct'] }}</span><br>
+            <span class="stat">3PT%</span>
+        </div>
+        <div>
+            <span class="data">{{ player['ft_pct'] }}</span><br>
+            <span class="stat">FT%</span>
+        </div>
+        <div>
+            <span class="data">{{ player['efg'] }}</span><br>
+            <span class="stat">eFG%</span>
+        </div>
+        <div>
+            <span class="data">{{ player['ts_pct'] }}</span><br>
+            <span class="stat">TS%</span>
+        </div>
+        <div>
+            <span class="data">{{ player['ppp'] }}</span><br>
+            <span class="stat">PPP</span>
+        </div>
+    </div>
+
+    <h3>BALL-HANDLING FREQUENCY</h3>
+    <div class="two-by-three">
+        <div>
+            <span class="data">{{ player['atr'] }}</span><br>
+            <span class="stat">AST/TO RATIO</span>
+        </div>
+        <div>
+            <span class="data">{{ player['usage'] }}</span><br>
+            <span class="stat">USAGE%</span>
+        </div>
+        <div>
+            <span class="data">{{ player['prb_poss'] }}</span><br>
+            <span class="stat">P&R POSSESSIONS</span>
+        </div>
+        <div>
+            <span class="data">{{ player['prb_ppp'] }}</span><br>
+            <span class="stat">P&R PPP</span>
+        </div>
+        <div>
+            <span class="data">{{ player['to'] }}</span><br>
+            <span class="stat">TURNOVERS</span>
+        </div>
+        <div>
+            <span class="data">{{ player['tov_pct'] }}</span><br>
+            <span class="stat">TURNOVER%</span>
+        </div>
+    </div>
+
+    <h3>ATTACKING THE RIM</h3>
+    <div class="two-by-three">
+        <div>
+            <span class="data">{{ player['rim_poss'] }}</span><br>
+            <span class="stat">ATTEMPTS AT THE RIM</span>
+        </div>
+        <div>
+            <span class="data">{{ player['rim_fg'] }}</span><br>
+            <span class="stat">FG% AT THE RIM</span>
+        </div>
+        <div>
+            <span class="data">{{ player['post_poss'] }}</span><br>
+            <span class="stat">POST-UP POSSESSIONS</span>
+        </div>
+        
+        <div>
+            <span class="data">{{ player['post_ppp'] }}</span><br>
+            <span class="stat">POST-UP PPP</span>
+        </div>
+        
+        <div>
+            <span class="data">{{ player['cut_pts'] }}</span><br>
+            <span class="stat">POINTS OFF CUTS</span>
+        </div>
+        <div>
+            <span class="data">{{ player['dunk_fgm'] }}</span><br>
+            <span class="stat">DUNKS</span>
+        </div>
+    </div>
+
+    <h3>DEFENDING</h3>
+    <div class="one-by-four">
+        <div>
+            <span class="data">{{ player['pd_ppp'] }}</span><br>
+            <span class="stat">PERIMETER PPP</span>
+        </div>
+        <div>
+            <span class="data">{{ player['pd_fg_pct'] }}</span><br>
+            <span class="stat">PERIMETER FG%</span>
+        </div>
+        <div>
+            <span class="data">{{ player['intd_ppp'] }}</span><br>
+            <span class="stat">INTERIOR PPP</span>
+        </div>
+        
+        <div>
+            <span class="data">{{ player['intd_fg_pct'] }}</span><br>
+            <span class="stat">INTERIOR FG%</span>
+        </div>
+    </div>
+
+    <h3>PLAYER TOTALS</h3>
+    <table class="totals-table">
+        <tr class="table-header">
+            <td>GP</td>
+            <td>PTS</td>
+            <td>FGM</td>
+            <td>FGA</td>
+            <td>3PM</td>
+            <td>3PA</td>
+            <td>FTM</td>
+            <td>FTA</td>
+            <td>AST</td>
+            <td>REB</td>
+            <td>OREB</td>
+            <td>STL</td>
+            <td>BLK</td>
+            <td>TOV</td>
+            <td>PF</td>
+        </tr>
+        <tr>
+            <td>{{ player['games'] }}</td>
+            <td>{{ player['pts'] }}</td>
+            <td>{{ player['fgm'] }}</td>
+            <td>{{ player['fga'] }}</td>
+            <td>{{ player['threem'] }}</td>
+            <td>{{ player['threea'] }}</td>
+            <td>{{ player['ftm'] }}</td>
+            <td>{{ player['fta'] }}</td>
+            <td>{{ player['ast'] }}</td>
+            <td>{{ player['reb'] }}</td>
+            <td>{{ player['oreb'] }}</td>
+            <td>{{ player['stl'] }}</td>
+            <td>{{ player['blk'] }}</td>
+            <td>{{ player['to'] }}</td>
+            <td>{{ player['fouls'] }}</td>
+        </tr>
+    </table>
+
+    <h1>{{ name }}</h1>
+</body>
+
+</html>

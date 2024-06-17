@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% set logo_img = 'img/logos/nescac_primary_logo.png' %}
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}" />
+    <title>NESCAC Men's Basketball Site</title>
+    </head>
+    <body>
+        <img class="logo" src="{{url_for('static', filename=logo_img)}}">
+        <h1>NESCAC MEN'S BASKETBALL</h1>
+        <h2>Stats thru 2022-23 Season</h2>
+
+        <hr style="color: white; width: 900px; border-style: dashed;">
+
+        <div class="content-container">
+            <div class="team-list">
+            <h2>Teams</h2>
+            <ul>
+                <li><a href="http://127.0.0.1:5000/teams/AMH">AMHERST COLLEGE MAMMOTHS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/BAT">BATES COLLEGE BOBCATS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/BOW">BOWDOIN COLLEGE POLAR BEARS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/COL">COLBY COLLEGE MULES</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/CON">CONNECTICUT COLLEGE CAMELS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/HAM">HAMILTON COLLEGE CONTINENTALS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/MID">MIDDLEBURY COLLEGE PANTHERS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/TRI">TRINITY COLLEGE BANTAMS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/TUF">TUFTS UNIVERSITY JUMBOS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/WES">WESLEYAN UNIVERSITY CARDINALS</a></li>
+                <li><a href="http://127.0.0.1:5000/teams/WIL">WILLIAMS COLLEGE EPHS</a></li>
+                <!-- Add more team links as needed -->
+            </ul>
+            </div>
+
+            <div class="top-players">
+                <h2>MVP Leaderboard</h2>
+                <ul>
+                    {% for player in top_players %}
+                    <li><a href="http://127.0.0.1:5000/players/{{ player['id'] }}"><span style="font-family: Stratum Bold;">{{ player['name'] }}</span> <span style="font-family: Stratum Regular;">{{ player['team_id'] }}</span></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+
+        <hr style="color: white; width: 900px; border-style: dashed;">
+
+        <div class="content-container">
+            <div class="top-players">
+                <h2>ROTY Leaderboard</h2>
+                <ul>
+                    {% for player in top_frosh %}
+                    <li><a href="http://127.0.0.1:5000/players/{{ player['id'] }}"><span style="font-family: Stratum Bold;">{{ player['name'] }}</span> <span style="font-family: Stratum Regular;">{{ player['team_id'] }}</span></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="top-players">
+                <h2>DPOY Leaderboard</h2>
+                <ul>
+                    {% for player in top_def %}
+                    <li><a href="http://127.0.0.1:5000/players/{{ player['id'] }}"><span style="font-family: Stratum Bold;">{{ player['name'] }}</span> <span style="font-family: Stratum Regular;">{{ player['team_id'] }}</span></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+
+        <hr style="color: white; width: 900px; border-style: dashed;">
+
+        <div class="content-container">
+            <div class="top-cat">
+                <h2>Top Scorers</h2>
+                <ul>
+                    {% for player in scoring %}
+                        <li><a href="http://127.0.0.1:5000/players/{{ player['id'] }}"><span style="font-family: Stratum Regular;">{{ player['name'] }} ({{ player['team_id'] }}):</span> <span style="font-family: Stratum Bold;">{{ player['ppg'] }} PPG</span></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="top-cat">
+                <h2>Top Passers</h2>
+                <ul>
+                    {% for player in passing %}
+                        <li><a href="http://127.0.0.1:5000/players/{{ player['id'] }}"><span style="font-family: Stratum Regular;">{{ player['name'] }} ({{ player['team_id'] }}):</span> <span style="font-family: Stratum Bold;">{{ player['apg'] }} APG</span></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="top-cat">
+                <h2>Top Rebounders</h2>
+                <ul>
+                    {% for player in rebounding %}
+                        <li><a href="http://127.0.0.1:5000/players/{{ player['id'] }}"><span style="font-family: Stratum Regular;">{{ player['name'] }} ({{ player['team_id'] }}):</span> <span style="font-family: Stratum Bold;">{{ player['rpg'] }} RPG</span></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
